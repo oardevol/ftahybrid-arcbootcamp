@@ -1,5 +1,5 @@
 RG=oardevol-ftalive-arc
-NAME=oardevol-ftalive-logs
+NAME=oardevol-ftalive-arc-logs
 
 az monitor log-analytics workspace create -g $RG -n $NAME
 
