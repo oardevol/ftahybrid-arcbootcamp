@@ -34,14 +34,15 @@ nodes:
     nodeRegistration:
       kubeletExtraArgs:
         node-labels: "ingress-ready=true"
-  extraPortMappings:
-  - containerPort: 80
-    hostPort: 80
-    protocol: TCP
-  - containerPort: 443
-    hostPort: 443
-    protocol: TCP
-- role: worker
+#  if Docker for Windows
+#  extraPortMappings:
+#  - containerPort: 80
+#    hostPort: 80
+#    protocol: TCP
+#  - containerPort: 443
+#    hostPort: 443
+#    protocol: TCP
+# - role: worker
 EOF
 
 cat <<EOF > audit-policy.yaml

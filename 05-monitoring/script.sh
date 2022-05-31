@@ -1,6 +1,6 @@
-RG=oardevol-ftalive-arc
-NAME=oardevol-ftalive-arc-logs
+groupName=oardevol-ftalive-arc
+workspaceName=oardevol-ftalive-arc-logs
 
-az monitor log-analytics workspace create -g $RG -n $NAME
+az monitor log-analytics workspace create -g $groupName -n $workspaceName
 
 #configure azure monitor using portal
