@@ -18,3 +18,23 @@ CLIENT_APP_ID=$(az ad app create --display-name "${clusterName}Client" --is-fall
 az ad sp create --id "${CLIENT_APP_ID}"
 az ad app permission add --id "${CLIENT_APP_ID}" --api "${SERVER_APP_ID}" --api-permissions ${APP_ROLE_ID}=Role
 az ad app permission grant --id "${CLIENT_APP_ID}" --api "${SERVER_APP_ID}" --scope ${APP_ROLE_ID}=Role
+
+SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+cat <<EOF > accessCheck.json
+{
+  "Name": "Read authorization",
+  "IsCustom": true,
+  "Description": "Read authorization",
+  "Actions": ["Microsoft.Authorization/*/read"],
+  "NotActions": [],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/${SUBSCRIPTION_ID}"
+  ]
+} 
+EOF
+ROLE_ID=$(az role definition create --role-definition ./accessCheck.json --query id -o tsv)
+az role assignment create --role "${ROLE_ID}" --assignee "${SERVER_APP_ID}" --scope /subscriptions/${SUBSCRIPTION_ID}
+
+az connectedk8s enable-features -n $clusterName -g $groupName --features azure-rbac --app-id "${SERVER_APP_ID}" --app-secret "${SERVER_APP_SECRET}"
