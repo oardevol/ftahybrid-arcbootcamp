@@ -38,13 +38,13 @@ az k8s-extension create \
     --configuration-settings "buildService.storageClassName=standard" \
     --configuration-settings "buildService.storageAccessMode=ReadWriteOnce" \
     --configuration-settings "customConfigMap=${namespace}/kube-environment-config" \
-    --configuration-settings "envoy.annotations.service.beta.kubernetes.io/azure-load-balancer-resource-group=${aksClusterGroupName}" \
+    --configuration-settings "envoy.annotations.service.beta.kubernetes.io/azure-load-balancer-resource-group=${groupName}" \
     --configuration-settings "logProcessor.appLogs.destination=log-analytics" \
     --configuration-protected-settings "logProcessor.appLogs.logAnalyticsConfig.customerId=${logAnalyticsWorkspaceIdEnc}" \
     --configuration-protected-settings "logProcessor.appLogs.logAnalyticsConfig.sharedKey=${logAnalyticsKeyEnc}"
 
 #delete (if issues!)
-az k8s-extension delete \
+az k8s-extension show \
     --resource-group $groupName \
     --name $extensionName \
     --cluster-type connectedClusters \
