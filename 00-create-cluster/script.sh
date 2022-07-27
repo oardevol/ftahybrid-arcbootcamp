@@ -52,7 +52,7 @@ rules:
 - level: Metadata
 EOF
 
-kind create cluster --config kind-config.yaml
+  kind create cluster --config kind-config.yaml
 
 #IF DOCKER IN LINUX! For WINDOWS we're using hostports *******************************************************************
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml
