@@ -26,7 +26,10 @@ nodes:
   extraMounts:
   - hostPath: ./audit-policy.yaml
     containerPath: /etc/kubernetes/policies/audit-policy.yaml
-    readOnly: true            
+    readOnly: true        
+  - hostPath: /
+    containerPath: /host
+    readOnly: true        
 - role: worker
   kubeadmConfigPatches:
   - |
