@@ -29,7 +29,7 @@ nodes:
     readOnly: true        
   - hostPath: /
     containerPath: /host
-    readOnly: true        
+    readOnly: false        
 - role: worker
   kubeadmConfigPatches:
   - |
